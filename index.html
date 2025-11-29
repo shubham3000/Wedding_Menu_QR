@@ -1,86 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Wedding Menu QR Generator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wedding Menu Card</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<body class="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100 flex items-center justify-center p-6">
 
-    <!-- QRCode.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  </head>
-  <body class="min-h-screen bg-gradient-to-b from-amber-50 to-orange-100 flex items-center justify-center p-4">
-    <div class="w-full max-w-md bg-white/90 shadow-lg rounded-2xl p-6 space-y-4">
-      <h1 class="text-xl font-bold text-amber-800 text-center">
-        Wedding Menu – QR Generator
+  <div class="max-w-sm w-full bg-white shadow-xl rounded-3xl p-6 border border-yellow-300">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h1 class="text-xl font-bold text-yellow-700 tracking-wide">
+        Sourav & Beauty
       </h1>
-
-      <p class="text-xs text-gray-600 text-center">
-        Enter the link or text for your menu. A QR code will be generated that guests can scan.
-      </p>
-
-      <!-- Input -->
-      <div class="space-y-2">
-        <label class="text-xs font-medium text-gray-700">
-          Menu URL / Text
-        </label>
-        <input
-          id="menu-text"
-          type="text"
-          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-          placeholder="https://yourdomain.com/menu.html"
-          value="https://yourdomain.com/menu.html"
-        />
-      </div>
-
-      <!-- Generate button -->
-      <button
-        id="generate-btn"
-        class="w-full mt-2 py-2 text-sm font-medium rounded-full bg-amber-600 text-white hover:bg-amber-700 transition"
-      >
-        Generate QR Code
-      </button>
-
-      <!-- QR Code Container -->
-      <div class="mt-4 flex flex-col items-center space-y-2">
-        <div
-          id="qrcode"
-          class="bg-white p-3 rounded-xl border border-gray-200"
-        ></div>
-        <p class="text-[11px] text-gray-500 text-center">
-          Right-click on the QR code to save it as an image and print or share.
-        </p>
-      </div>
+      <p class="text-xs text-gray-600 -mt-1">Shubh Vivah</p>
+      <div class="border-b border-yellow-300 w-24 mx-auto mt-2"></div>
     </div>
 
-    <script>
-      // Create QRCode instance
-      const qrContainer = document.getElementById("qrcode");
-      const menuInput = document.getElementById("menu-text");
-      const generateBtn = document.getElementById("generate-btn");
+    <!-- Menu Title -->
+    <h2 class="text-center text-lg font-semibold text-yellow-800 mb-4">
+      Wedding Menu
+    </h2>
 
-      let qrCode = new QRCode(qrContainer, {
-        text: menuInput.value, // default text
-        width: 200,
-        height: 200,
-      });
+    <!-- Menu Sections -->
+    <div class="space-y-4">
 
-      generateBtn.addEventListener("click", () => {
-        const text = menuInput.value.trim();
-        if (!text) {
-          alert("Please enter a menu URL or some text.");
-          return;
-        }
-        // Clear old QR and generate new one
-        qrContainer.innerHTML = "";
-        qrCode = new QRCode(qrContainer, {
-          text: text,
-          width: 200,
-          height: 200,
-        });
-      });
-    </script>
-  </body>
+      <!-- Starters -->
+      <div>
+        <h3 class="text-sm font-bold text-yellow-700 mb-1">Starters</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+          <li>Paneer Tikka</li>
+          <li>Hara Bhara Kebab</li>
+          <li>Veg Spring Rolls</li>
+          <li>Honey Chilli Potato</li>
+        </ul>
+      </div>
+
+      <!-- Main Course -->
+      <div>
+        <h3 class="text-sm font-bold text-yellow-700 mb-1">Main Course</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+          <li>Shahi Paneer</li>
+          <li>Dal Makhani</li>
+          <li>Mix Vegetable Curry</li>
+          <li>Veg Biryani</li>
+          <li>Jeera Rice</li>
+        </ul>
+      </div>
+
+      <!-- Breads -->
+      <div>
+        <h3 class="text-sm font-bold text-yellow-700 mb-1">Indian Breads</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+          <li>Butter Naan</li>
+          <li>Tandoori Roti</li>
+          <li>Lachha Paratha</li>
+        </ul>
+      </div>
+
+      <!-- Desserts -->
+      <div>
+        <h3 class="text-sm font-bold text-yellow-700 mb-1">Desserts</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+          <li>Gulab Jamun</li>
+          <li>Rasmalai</li>
+          <li>Ice Cream (Vanilla / Chocolate)</li>
+        </ul>
+      </div>
+
+      <!-- Beverages -->
+      <div>
+        <h3 class="text-sm font-bold text-yellow-700 mb-1">Beverages</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+          <li>Masala Chaas</li>
+          <li>Fresh Lime Soda</li>
+          <li>Soft Drinks</li>
+          <li>Mineral Water</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <p class="text-center text-sm text-gray-500 mt-6">
+      Thank you for being a part of our special day.
+    </p>
+    <p class="text-center text-xs text-gray-500 mt-3">
+      Design by Sadhu Digitals (+91 83403 51872)
+    </p>
+
+  </div>
+
+</body>
 </html>
