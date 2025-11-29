@@ -1,111 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Wedding Menu Card</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wedding Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <body
-    class="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100 flex items-center justify-center p-6"
-  >
-    <!-- Menu Card Container (filled by JS) -->
-    <div
-      id="menu-card"
-      class="max-w-sm w-full bg-white shadow-xl rounded-3xl p-6 border border-yellow-300"
-    >
-      <!-- Fallback content while loading -->
-      <p class="text-center text-sm text-gray-500">Loading menu...</p>
+  <style>
+    .fade-img {
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    .fade-img.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100 flex items-center justify-center p-6">
+
+  <div class="max-w-sm w-full">
+    <!-- WELCOME CARD -->
+    <div id="welcome-card" class="bg-white shadow-xl rounded-3xl p-6 border border-yellow-300 space-y-4">
+      
+      <div class="text-center space-y-2">
+        <h1 id="welcome-couple" class="text-2xl font-bold text-yellow-700 tracking-wide"></h1>
+        <p id="welcome-tagline" class="text-xs text-gray-600"></p>
+        <div class="border-b border-yellow-300 w-24 mx-auto mt-2"></div>
+        <p id="welcome-date-venue" class="text-[11px] text-gray-500 mt-1"></p>
+      </div>
+
+      <!-- PHOTO SLIDER (NO THUMBNAILS) -->
+      <div id="welcome-photo-wrapper" class="flex justify-center">
+        <div class="w-40 h-40 rounded-full overflow-hidden shadow-md border-4 border-amber-100">
+          <img
+            id="welcome-main-photo"
+            src=""
+            alt="Couple Photo"
+            class="w-full h-full object-cover fade-img"
+          />
+        </div>
+      </div>
+
+      <!-- MESSAGE -->
+      <p id="welcome-message" class="text-sm text-gray-700 text-center mt-2"></p>
+
+      <!-- BUTTON -->
+      <div class="pt-2">
+        <button
+          id="view-menu-btn"
+          class="w-full py-2 text-sm font-medium rounded-full bg-amber-600 text-white hover:bg-amber-700 transition"
+        >
+          View Menu
+        </button>
+      </div>
     </div>
 
-    <script>
-      // Load JSON and render menu
-      async function loadMenu() {
-        const container = document.getElementById("menu-card");
+    <!-- MENU CARD -->
+    <div id="menu-card" class="mt-4 bg-white shadow-xl rounded-3xl p-6 border border-yellow-300 hidden">
+      
+      <div class="text-center mb-4">
+        <h1 id="menu-couple" class="text-xl font-bold text-yellow-700 tracking-wide"></h1>
+        <p id="menu-tagline" class="text-xs text-gray-600 -mt-1"></p>
+        <div class="border-b border-yellow-300 w-24 mx-auto mt-2"></div>
+      </div>
 
-        try {
-          const response = await fetch("menu-data.json");
-          if (!response.ok) {
-            throw new Error("Failed to load menu-data.json");
-          }
+      <h2 id="menu-title" class="text-center text-lg font-semibold text-yellow-800 mb-4"></h2>
 
-          const data = await response.json();
+      <div id="menu-sections" class="space-y-3"></div>
 
-          // Build sections HTML
-          const sectionsHtml = data.sections
-            .map((section) => {
-              const itemsHtml = section.items
-                .map(
-                  (item) =>
-                    `<li class="list-disc list-inside text-sm text-gray-700">${item}</li>`
-                )
-                .join("");
+      <p id="menu-footer" class="text-center text-sm text-gray-500 mt-6"></p>
+      <p id="menu-copyright" class="text-center text-xs text-gray-400 mt-2"></p>
+    </div>
+  </div>
 
-              return `
-              <div class="mb-4">
-                <h3 class="text-sm font-bold text-yellow-700 mb-1">${section.title}</h3>
-                <ul class="space-y-1">
-                  ${itemsHtml}
-                </ul>
-              </div>
-            `;
-            })
-            .join("");
+  <script>
+    async function loadMenu() {
+      const welcomeCard = document.getElementById('welcome-card');
+      const menuCard = document.getElementById('menu-card');
 
-          // Full card HTML
-          container.innerHTML = `
-          <!-- Header -->
-          <div class="text-center mb-4">
-            <h1 class="text-xl font-bold text-yellow-700 tracking-wide">
-              ${data.coupleName || ""}
-            </h1>
-            ${
-              data.tagline
-                ? `<p class="text-xs text-gray-600 -mt-1">${data.tagline}</p>`
-                : ""
-            }
-            <div class="border-b border-yellow-300 w-24 mx-auto mt-2"></div>
-          </div>
+      try {
+        const response = await fetch('menu-data.json');
+        if (!response.ok) throw new Error('Failed to load menu-data.json');
 
-          <!-- Menu Title -->
-          <h2 class="text-center text-lg font-semibold text-yellow-800 mb-4">
-            ${data.title || "Menu"}
-          </h2>
+        const data = await response.json();
 
-          <!-- Menu Sections -->
-          <div class="space-y-2">
-            ${sectionsHtml}
-          </div>
+        // WELCOME DATA
+        document.getElementById('welcome-couple').textContent = data.coupleName || '';
+        document.getElementById('welcome-tagline').textContent = data.tagline || '';
+        document.getElementById('welcome-date-venue').textContent =
+          [data.eventDate, data.venue].filter(Boolean).join(' • ');
+        document.getElementById('welcome-message').textContent =
+          data.welcomeMessage || 'Welcome to our wedding!';
 
-          <!-- Footer -->
-          ${
-            data.footerNote
-              ? `<p class="text-center text-[11px] text-gray-500 mt-6">
-                  ${data.footerNote}
-                </p>`
-              : ""
-          }
-          <!-- Copyright Info -->
-          ${
-            data.copyrightInfo
-              ? `<p class="text-center text-[11px] text-gray-500 mt-2">
-                  ${data.copyrightInfo}
-                </p>`
-              : ""
-          }
-        `;
-        } catch (error) {
-          console.error(error);
-          container.innerHTML = `
-          <p class="text-center text-sm text-red-600">
-            Unable to load menu. Please try again later.
-          </p>
-        `;
+        const photos = Array.isArray(data.photos) ? data.photos : [];
+        const mainPhoto = document.getElementById('welcome-main-photo');
+
+        let currentIndex = 0;
+
+        function fadeInImage(src) {
+          mainPhoto.classList.remove('show');
+          setTimeout(() => {
+            mainPhoto.src = src;
+            setTimeout(() => mainPhoto.classList.add('show'), 50);
+          }, 300);
         }
-      }
 
-      loadMenu();
-    </script>
-  </body>
+        if (photos.length > 0) {
+          fadeInImage(photos[0]);
+
+          if (photos.length > 1) {
+            setInterval(() => {
+              currentIndex = (currentIndex + 1) % photos.length;
+              fadeInImage(photos[currentIndex]);
+            }, 4000);
+          }
+        } else {
+          document.getElementById('welcome-photo-wrapper').classList.add('hidden');
+        }
+
+        // MENU DATA
+        document.getElementById('menu-couple').textContent = data.coupleName || '';
+        document.getElementById('menu-tagline').textContent = data.tagline || '';
+        document.getElementById('menu-title').textContent = data.title || 'Menu';
+        document.getElementById('menu-footer').textContent = data.footerNote || '';
+        document.getElementById('menu-copyright').textContent = data.copyrightInfo || '© All rights reserved to Sadhu Digital +91 83403 51872.';
+
+        const sectionsContainer = document.getElementById('menu-sections');
+        sectionsContainer.innerHTML = '';
+
+        if (Array.isArray(data.sections)) {
+          data.sections.forEach(section => {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'mb-2';
+
+            sectionDiv.innerHTML = `
+              <h3 class="text-sm font-bold text-yellow-700 mb-1">${section.title}</h3>
+              <ul class="space-y-1">
+                ${section.items
+                  .map(item => `<li class="list-disc list-inside text-sm text-gray-700">${item}</li>`)
+                  .join('')}
+              </ul>
+            `;
+
+            sectionsContainer.appendChild(sectionDiv);
+          });
+        }
+
+        // OPEN MENU BUTTON
+        document.getElementById('view-menu-btn').addEventListener('click', () => {
+          welcomeCard.classList.add('hidden');
+          menuCard.classList.remove('hidden');
+        });
+
+      } catch (err) {
+        console.error(err);
+        welcomeCard.innerHTML = `
+          <p class="text-center text-sm text-red-600">Unable to load wedding details.</p>
+        `;
+      }
+    }
+
+    loadMenu();
+  </script>
+
+</body>
 </html>

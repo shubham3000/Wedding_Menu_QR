@@ -1,9 +1,16 @@
 {
   "coupleName": "Sourav & Beauty",
   "tagline": "Shubh Vivah",
+  "eventDate": "26 November 2025",
+  "venue": "Adarash Colony, Jamtara",
+  "welcomeMessage": "Welcome to our Reception! We feel blessed to have you with us on this special day. Please enjoy the food and celebrations.",
+  "photos": [
+    "images/Beauty.jpg",
+    "images/Sourav.jpg"
+  ],
   "title": "Reception Menu",
   "footerNote": "Thank you for being a part of our special day.",
-  "copyrightInfo": "© All rights reserved by Sadhu Digital Studio. +91 83403 51872",
+  "copyrightInfo": "© All rights reserved to Sadhu Digital +91 83403 51872.",
   "sections": [
     {
       "title": "Starters",
@@ -36,8 +43,8 @@
       "title": "Desserts",
       "items": [
         "Gulab Jamun",
-        "Rasmalai",
-        "Ice Cream (Vanilla / Chocolate)"
+          "Rasmalai",
+          "Ice Cream (Vanilla / Chocolate)"
       ]
     },
     {
