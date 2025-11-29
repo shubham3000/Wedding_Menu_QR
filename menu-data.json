@@ -1,0 +1,53 @@
+{
+  "coupleName": "Sourav & Beauty",
+  "tagline": "Shubh Vivah",
+  "title": "Reception Menu",
+  "footerNote": "Thank you for being a part of our special day.",
+  "copyrightInfo": "© All rights reserved by Sadhu Digital Studio. +91 83403 51872",
+  "sections": [
+    {
+      "title": "Starters",
+      "items": [
+        "Paneer Tikka",
+        "Hara Bhara Kebab",
+        "Veg Spring Rolls",
+        "Honey Chilli Potato"
+      ]
+    },
+    {
+      "title": "Main Course",
+      "items": [
+        "Shahi Paneer",
+        "Dal Makhani",
+        "Mix Vegetable Curry",
+        "Veg Biryani",
+        "Jeera Rice"
+      ]
+    },
+    {
+      "title": "Indian Breads",
+      "items": [
+        "Butter Naan",
+        "Tandoori Roti",
+        "Lachha Paratha"
+      ]
+    },
+    {
+      "title": "Desserts",
+      "items": [
+        "Gulab Jamun",
+        "Rasmalai",
+        "Ice Cream (Vanilla / Chocolate)"
+      ]
+    },
+    {
+      "title": "Beverages",
+      "items": [
+        "Masala Chaas",
+        "Fresh Lime Soda",
+        "Soft Drinks",
+        "Mineral Water"
+      ]
+    }
+  ]
+}
